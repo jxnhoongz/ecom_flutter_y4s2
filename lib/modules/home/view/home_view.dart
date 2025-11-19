@@ -68,27 +68,36 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xFF03A9F4),
-        title: const Text(
+        backgroundColor: colorScheme.primary,
+        title: Text(
           'ShopEase',
           style: TextStyle(
-            color: Colors.white,
+            color: colorScheme.onPrimary,
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, color: Colors.white),
+            icon: Icon(Icons.notifications_outlined, color: colorScheme.onPrimary),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.shopping_cart_outlined, color: Colors.white),
+            icon: Icon(Icons.shopping_cart_outlined, color: colorScheme.onPrimary),
             onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.logout, color: colorScheme.onPrimary),
+            onPressed: () {
+              Get.offAllNamed("/login");
+            },
           ),
         ],
       ),
@@ -98,14 +107,14 @@ class HomeView extends StatelessWidget {
           children: [
             // Search Bar
             Container(
-              color: const Color(0xFF03A9F4),
+              color: colorScheme.primary,
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search products...',
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                  prefixIcon: Icon(Icons.search, color: colorScheme.onSurfaceVariant),
                   filled: true,
-                  fillColor: Colors.white,
+                  fillColor: colorScheme.surface,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
@@ -120,8 +129,8 @@ class HomeView extends StatelessWidget {
               margin: const EdgeInsets.all(16),
               height: 150,
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF03A9F4), Color(0xFF0288D1)],
+                gradient: LinearGradient(
+                  colors: [colorScheme.primary, colorScheme.primaryContainer],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -135,11 +144,11 @@ class HomeView extends StatelessWidget {
                     child: Icon(
                       Icons.local_offer,
                       size: 100,
-                      color: Colors.white.withOpacity(0.3),
+                      color: colorScheme.onPrimary.withValues(alpha: 0.3),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(20),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -147,28 +156,28 @@ class HomeView extends StatelessWidget {
                         Text(
                           'Special Offer',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: colorScheme.onPrimary,
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           'Get 20% off on all items',
                           style: TextStyle(
-                            color: Colors.white70,
+                            color: colorScheme.onPrimary.withValues(alpha: 0.7),
                             fontSize: 14,
                           ),
                         ),
-                        SizedBox(height: 12),
+                        const SizedBox(height: 12),
                         Text(
                           'Shop Now',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: colorScheme.onPrimary,
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
+                            decorationColor: colorScheme.onPrimary,
                           ),
                         ),
                       ],
@@ -206,11 +215,11 @@ class HomeView extends StatelessWidget {
                           width: 60,
                           height: 60,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: colorScheme.surface,
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: colorScheme.shadow.withValues(alpha: 0.1),
                                 blurRadius: 8,
                                 offset: const Offset(0, 2),
                               ),
@@ -218,16 +227,17 @@ class HomeView extends StatelessWidget {
                           ),
                           child: Icon(
                             categories[index]['icon'],
-                            color: const Color(0xFF03A9F4),
+                            color: colorScheme.primary,
                             size: 28,
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           categories[index]['name'],
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
+                            color: colorScheme.onSurface,
                           ),
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
@@ -245,18 +255,19 @@ class HomeView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Popular Products',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
                     ),
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       'See All',
-                      style: TextStyle(color: Color(0xFF03A9F4)),
+                      style: TextStyle(color: colorScheme.primary),
                     ),
                   ),
                 ],
@@ -276,7 +287,7 @@ class HomeView extends StatelessWidget {
               ),
               itemCount: mockProducts.length,
               itemBuilder: (context, index) {
-                return _buildProductCard(mockProducts[index]);
+                return _buildProductCard(mockProducts[index], colorScheme);
               },
             ),
             const SizedBox(height: 16),
@@ -285,8 +296,9 @@ class HomeView extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF03A9F4),
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: colorScheme.primary,
+        unselectedItemColor: colorScheme.onSurfaceVariant,
+        backgroundColor: colorScheme.surface,
         currentIndex: 0,
         items: const [
           BottomNavigationBarItem(
@@ -310,14 +322,14 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _buildProductCard(Map<String, dynamic> product) {
+  Widget _buildProductCard(Map<String, dynamic> product, ColorScheme colorScheme) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: colorScheme.shadow.withValues(alpha: 0.08),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -331,14 +343,14 @@ class HomeView extends StatelessWidget {
             flex: 3,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: colorScheme.surfaceContainerHighest,
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
               ),
               child: Center(
                 child: Icon(
                   product['image'],
                   size: 48,
-                  color: const Color(0xFF03A9F4),
+                  color: colorScheme.primary,
                 ),
               ),
             ),
@@ -354,9 +366,10 @@ class HomeView extends StatelessWidget {
                 children: [
                   Text(
                     product['name'],
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 13,
+                      color: colorScheme.onSurface,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -366,8 +379,8 @@ class HomeView extends StatelessWidget {
                     children: [
                       Text(
                         '\$${product['price']}',
-                        style: const TextStyle(
-                          color: Color(0xFF03A9F4),
+                        style: TextStyle(
+                          color: colorScheme.primary,
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
                         ),
@@ -381,9 +394,9 @@ class HomeView extends StatelessWidget {
                           ),
                           Text(
                             '${product['rating']}',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
-                              color: Colors.grey,
+                              color: colorScheme.onSurfaceVariant,
                             ),
                           ),
                         ],
