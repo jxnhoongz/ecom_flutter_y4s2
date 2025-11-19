@@ -108,6 +108,7 @@ class RegisterViewModel extends GetxController{
 
     if(registerRes.isSuccess == true){
       showMassageSuccess("Registration Successful!");
+      await Future.delayed(Duration(milliseconds: 500));
       Get.back();
     } else {
       showMassageError("Registration failed. Please try again.");
