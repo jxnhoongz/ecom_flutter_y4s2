@@ -13,7 +13,21 @@ class MyApp  extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF03A9F4), // Light Blue
+          brightness: Brightness.light,
+        ),
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF03A9F4), // Light Blue
+          brightness: Brightness.dark,
+        ),
+      ),
       initialRoute: '/splash',
       getPages: [
         GetPage(

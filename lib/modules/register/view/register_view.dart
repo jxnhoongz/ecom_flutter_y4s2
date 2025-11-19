@@ -1,409 +1,262 @@
-
 import 'package:app_e_commerce/modules/register/view_model/register_view_model.dart';
-import 'package:app_e_commerce/widgets/subtitle_widget.dart';
+import 'package:app_e_commerce/widgets/auth/auth_button.dart';
+import 'package:app_e_commerce/widgets/auth/auth_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../widgets/header_title_widget.dart';
-
-
-class RegisterView extends StatelessWidget{
+class RegisterView extends StatelessWidget {
   RegisterView({super.key});
-  var registerViewModel = Get.put(RegisterViewModel());
+
+  final registerViewModel = Get.put(RegisterViewModel());
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: colorScheme.onSurface,
+          ),
+          onPressed: () => Get.back(),
         ),
-        title: Text("Register",style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.blue,
       ),
-      body: Obx((){
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              HeaderTitleWidget(title: "Register"),
-              SubtitleWidget(subtitle: "to E-Commerce App"),
-              SizedBox(
-                height: 35,
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: TextField(onChanged: (value){
-                  registerViewModel.onChangeValueUsername(value);
-                },
+      body: SafeArea(
+        child: Obx(() {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 8),
+
+                // Logo/Branding
+                _buildLogo(colorScheme),
+
+                const SizedBox(height: 24),
+
+                // Title Text
+                _buildTitleText(theme),
+
+                const SizedBox(height: 32),
+
+                // Username Field
+                AuthTextField(
                   controller: registerViewModel.usernameController.value,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
-                      labelText: "Username",
-                      labelStyle: TextStyle(
-                          color: Colors.black54
-                      ),
-                      hintText: "Enter your username",
-                      hintStyle: TextStyle(
-                          color: Colors.black
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          ),
-                          borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.5
-                          )
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.5
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10)
-                        ),
-                      )
-                  ),
+                  labelText: 'Username',
+                  hintText: 'Enter your username',
+                  prefixIcon: Icons.person_outline,
+                  onChanged: registerViewModel.onChangeValueUsername,
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: TextField(onChanged: (value){
-                  registerViewModel.onChangeValueFirstName(value);
-                },
-                  controller: registerViewModel.firstNameController.value,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.badge),
-                      labelText: "First Name",
-                      labelStyle: TextStyle(
-                          color: Colors.black54
+
+                const SizedBox(height: 16),
+
+                // First Name & Last Name Row
+                Row(
+                  children: [
+                    Expanded(
+                      child: AuthTextField(
+                        controller: registerViewModel.firstNameController.value,
+                        labelText: 'First Name',
+                        hintText: 'First name',
+                        prefixIcon: Icons.badge_outlined,
+                        onChanged: registerViewModel.onChangeValueFirstName,
                       ),
-                      hintText: "Enter your first name",
-                      hintStyle: TextStyle(
-                          color: Colors.black
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: AuthTextField(
+                        controller: registerViewModel.lastNameController.value,
+                        labelText: 'Last Name',
+                        hintText: 'Last name',
+                        prefixIcon: Icons.badge_outlined,
+                        onChanged: registerViewModel.onChangeValueLastName,
                       ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          ),
-                          borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.5
-                          )
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.5
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10)
-                        ),
-                      )
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: TextField(onChanged: (value){
-                  registerViewModel.onChangeValueLastName(value);
-                },
-                  controller: registerViewModel.lastNameController.value,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.badge_outlined),
-                      labelText: "Last Name",
-                      labelStyle: TextStyle(
-                          color: Colors.black54
-                      ),
-                      hintText: "Enter your last name",
-                      hintStyle: TextStyle(
-                          color: Colors.black
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          ),
-                          borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.5
-                          )
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.5
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10)
-                        ),
-                      )
-                  ),
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: TextField(onChanged: (value){
-                  registerViewModel.onChangeValueEmail(value);
-                },
+
+                const SizedBox(height: 16),
+
+                // Email Field
+                AuthTextField(
                   controller: registerViewModel.emailController.value,
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                  prefixIcon: Icons.email_outlined,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      labelText: "Email",
-                      labelStyle: TextStyle(
-                          color: Colors.black54
-                      ),
-                      hintText: "Enter your email",
-                      hintStyle: TextStyle(
-                          color: Colors.black
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          ),
-                          borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.5
-                          )
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.5
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10)
-                        ),
-                      )
-                  ),
+                  onChanged: registerViewModel.onChangeValueEmail,
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: TextField(onChanged: (value){
-                  registerViewModel.onChangeValuePhoneNumber(value);
-                },
+
+                const SizedBox(height: 16),
+
+                // Phone Number Field
+                AuthTextField(
                   controller: registerViewModel.phoneNumberController.value,
+                  labelText: 'Phone Number',
+                  hintText: 'Enter your phone number',
+                  prefixIcon: Icons.phone_outlined,
                   keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.phone),
-                      labelText: "Phone Number",
-                      labelStyle: TextStyle(
-                          color: Colors.black54
-                      ),
-                      hintText: "Enter your phone number",
-                      hintStyle: TextStyle(
-                          color: Colors.black
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          ),
-                          borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.5
-                          )
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.5
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10)
-                        ),
-                      )
-                  ),
+                  onChanged: registerViewModel.onChangeValuePhoneNumber,
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: TextField(
-                  onChanged: (value){
-                    registerViewModel.onChangeValuePassword(value);
-                  },
+
+                const SizedBox(height: 16),
+
+                // Password Field
+                AuthPasswordField(
                   controller: registerViewModel.passwordController.value,
-                  obscureText: registerViewModel.enablePassword.value,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: InkWell(
-                        onTap: (){
-                          var value = registerViewModel.enablePassword.value;
-                          registerViewModel.onEnablePassword(!value);
-                        },
-                          child: Icon(Icons.remove_red_eye)
-                      ),
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                          color: Colors.black54
-                      ),
-                      hintText: "Enter your password",
-                      hintStyle: TextStyle(
-                          color: Colors.black
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          ),
-                          borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.5
-                          )
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.5
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10)
-                        ),
-                      )
-                  ),
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                  textInputAction: TextInputAction.next,
+                  onChanged: registerViewModel.onChangeValuePassword,
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                child: TextField(
-                  onChanged: (value){
-                    registerViewModel.onChangeValueConfirmPassword(value);
-                  },
+
+                const SizedBox(height: 16),
+
+                // Confirm Password Field
+                AuthPasswordField(
                   controller: registerViewModel.confirmPasswordController.value,
-                  obscureText: registerViewModel.enableConfirmPassword.value,
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.lock_outline),
-                      suffixIcon: InkWell(
-                        onTap: (){
-                          var value = registerViewModel.enableConfirmPassword.value;
-                          registerViewModel.onEnableConfirmPassword(!value);
-                        },
-                          child: Icon(Icons.remove_red_eye)
-                      ),
-                      labelText: "Confirm Password",
-                      labelStyle: TextStyle(
-                          color: Colors.black54
-                      ),
-                      hintText: "Confirm your password",
-                      hintStyle: TextStyle(
-                          color: Colors.black
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          )
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(10)
-                          ),
-                          borderSide: BorderSide(
-                              color: Colors.black54,
-                              width: 2.5
-                          )
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            color: Colors.black,
-                            width: 2.5
-                        ),
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10)
-                        ),
-                      )
-                  ),
+                  labelText: 'Confirm Password',
+                  hintText: 'Re-enter your password',
+                  onChanged: registerViewModel.onChangeValueConfirmPassword,
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                child: ElevatedButton(
-                  onPressed: (){
+
+                const SizedBox(height: 16),
+
+                // Terms & Conditions Checkbox
+                _buildTermsCheckbox(theme, colorScheme),
+
+                const SizedBox(height: 24),
+
+                // Register Button
+                AuthButton(
+                  text: 'Register',
+                  onPressed: () {
                     registerViewModel.onRegister();
                   },
-                  child: Container(
-                    width: double.infinity,
-                    child: Text("Register",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))
-                      )
-                  ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: ElevatedButton(
-                  onPressed: (){
+
+                const SizedBox(height: 32),
+
+                // Login Link
+                AuthTextButton(
+                  prefixText: 'Already have an account?',
+                  text: 'Login',
+                  onPressed: () {
                     Get.back();
                   },
-                  child: Container(
-                    width: double.infinity,
-                    child: Text("Back to Login",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10))
-                      )
-                  ),
                 ),
-              ),
-            ],
+
+                const SizedBox(height: 24),
+              ],
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildLogo(ColorScheme colorScheme) {
+    return Center(
+      child: Container(
+        width: 64,
+        height: 64,
+        decoration: BoxDecoration(
+          color: colorScheme.primary,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.primary.withValues(alpha: 0.3),
+              blurRadius: 16,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Icon(
+          Icons.shopping_bag_outlined,
+          size: 32,
+          color: colorScheme.onPrimary,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitleText(ThemeData theme) {
+    return Column(
+      children: [
+        Text(
+          'Create Account',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
           ),
-        );
-      })
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Sign up to start shopping',
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTermsCheckbox(ThemeData theme, ColorScheme colorScheme) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 24,
+          height: 24,
+          child: Checkbox(
+            value: false, // TODO: Connect to ViewModel
+            onChanged: (value) {
+              // TODO: Update terms acceptance
+            },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+              children: [
+                const TextSpan(text: 'I agree to the '),
+                TextSpan(
+                  text: 'Terms & Conditions',
+                  style: TextStyle(
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  // TODO: Add gesture recognizer for tap
+                ),
+                const TextSpan(text: ' and '),
+                TextSpan(
+                  text: 'Privacy Policy',
+                  style: TextStyle(
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  // TODO: Add gesture recognizer for tap
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
