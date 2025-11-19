@@ -1,5 +1,6 @@
 
 import 'package:app_e_commerce/modules/login/view_model/login_view_model.dart';
+import 'package:app_e_commerce/modules/register/view/register_view.dart';
 import 'package:app_e_commerce/widgets/subtitle_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -153,7 +154,9 @@ class LoginView extends StatelessWidget{
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.to(() => RegisterView());
+                  },
                   child: Container(
                     width: double.infinity,
                     child: Text("Register",

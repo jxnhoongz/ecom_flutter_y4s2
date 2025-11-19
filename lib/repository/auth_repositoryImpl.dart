@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_e_commerce/models/Request/Login_request.dart';
+import 'package:app_e_commerce/models/Request/Register_request.dart';
 import 'package:app_e_commerce/models/response/Login_response.dart';
 import 'package:app_e_commerce/repository/auth_repository.dart';
 import 'package:app_e_commerce/service/constant_uri.dart';
@@ -18,5 +19,26 @@ class AuthRepositoryImpl implements AuthRepository{
       return LoginResponse.fromJson(jsonDecode(response.data));
     }
     return loginResponse;
+  }
+
+  @override
+  Future<LoginResponse> register(String username, String firstName, String lastName, String email, String phoneNumber, String password) async {
+    LoginResponse registerResponse = LoginResponse();
+    var response = await serviceApi.postApi(
+      uri: ConstantUri.registerPath,
+      body: jsonEncode(RegisterRequest(
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+        password: password,
+      ).toJson())
+    );
+
+    if(response.isSuccess == true){
+      return LoginResponse.fromJson(jsonDecode(response.data));
+    }
+    return registerResponse;
   }
 }
