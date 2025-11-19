@@ -1,4 +1,4 @@
-package com.sivlay.app_e_commerce
+package com.vatana.app_e_commerce
 
 import io.flutter.embedding.android.FlutterActivity
 

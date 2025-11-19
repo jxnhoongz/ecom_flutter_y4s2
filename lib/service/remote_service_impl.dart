@@ -18,18 +18,24 @@ class RemoteServiceImpl extends RemoteService{
       seconds: 120
     ));
 
-    if(response.statusCode == 200){
+    print("API Response [${response.statusCode}]: ${response.body}");
+
+    if(response.statusCode == 200 || response.statusCode == 201){
       responseBody.isSuccess = true;
       responseBody.errorCode = "${response.statusCode}";
       responseBody.message = "Success";
       responseBody.data = response.body;
       if(kDebugMode){
-        print("Response Body $response");
+        print("Response Body: ${response.body}");
       }
     }else{
-      responseBody.isSuccess = true;
+      responseBody.isSuccess = false;
       responseBody.errorCode = "${response.statusCode}";
       responseBody.message = "Error";
+      responseBody.data = response.body;
+      if(kDebugMode){
+        print("Error Response [${response.statusCode}]: ${response.body}");
+      }
     }
 
     return responseBody;

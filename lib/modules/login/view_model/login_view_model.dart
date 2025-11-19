@@ -41,8 +41,9 @@ class LoginViewModel extends GetxController{
     var loginRes = await authRepository.login(username.value, password.value);
     if(loginRes.accessToken != null){
       showMassageSuccess("Login Successfully.");
+    } else {
+      showMassageError("Username and password incorrect.");
     }
-    showMassageSuccess("username and password incorrect.");
 
   }
   showMassageError(String message){

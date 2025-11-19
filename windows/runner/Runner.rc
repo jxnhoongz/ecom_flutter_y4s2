@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.sivlay" "\0"
+            VALUE "CompanyName", "com.vatana" "\0"
             VALUE "FileDescription", "app_e_commerce" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "app_e_commerce" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.sivlay. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 com.vatana. All rights reserved." "\0"
             VALUE "OriginalFilename", "app_e_commerce.exe" "\0"
             VALUE "ProductName", "app_e_commerce" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

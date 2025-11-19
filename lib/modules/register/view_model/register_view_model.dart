@@ -106,8 +106,8 @@ class RegisterViewModel extends GetxController{
       password.value,
     );
 
-    if(registerRes.accessToken != null){
-      showMassageSuccess("Registration Successful.");
+    if(registerRes.isSuccess == true){
+      showMassageSuccess("Registration Successful!");
       Get.back();
     } else {
       showMassageError("Registration failed. Please try again.");

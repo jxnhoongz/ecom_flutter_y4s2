@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:app_e_commerce/models/Request/Login_request.dart';
 import 'package:app_e_commerce/models/Request/Register_request.dart';
+import 'package:app_e_commerce/models/api_base_response.dart';
 import 'package:app_e_commerce/models/response/Login_response.dart';
 import 'package:app_e_commerce/repository/auth_repository.dart';
 import 'package:app_e_commerce/service/constant_uri.dart';
@@ -22,8 +23,7 @@ class AuthRepositoryImpl implements AuthRepository{
   }
 
   @override
-  Future<LoginResponse> register(String username, String firstName, String lastName, String email, String phoneNumber, String password) async {
-    LoginResponse registerResponse = LoginResponse();
+  Future<ApiBaseResponse> register(String username, String firstName, String lastName, String email, String phoneNumber, String password) async {
     var response = await serviceApi.postApi(
       uri: ConstantUri.registerPath,
       body: jsonEncode(RegisterRequest(
@@ -33,12 +33,12 @@ class AuthRepositoryImpl implements AuthRepository{
         email: email,
         phoneNumber: phoneNumber,
         password: password,
+        confirmPassword: password,
+        profile: "NON",
+        role: "USER",
       ).toJson())
     );
 
-    if(response.isSuccess == true){
-      return LoginResponse.fromJson(jsonDecode(response.data));
-    }
-    return registerResponse;
+    return response;
   }
 }
