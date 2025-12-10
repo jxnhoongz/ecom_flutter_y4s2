@@ -109,14 +109,17 @@ class ProductRepositoryImpl implements ProductRepository {
       // Get auth token
       String? token = await userDataStorage.getAccessToken();
 
+      // Use list endpoint with ID filter instead of /{id} endpoint
       var response = await serviceApi.postApi(
-        uri: '${ConstantUri.postByIdPath}/$id',
+        uri: ConstantUri.postListPath,
         body: jsonEncode({
-          "limit": 10,
+          "limit": 1,
           "page": 0,
           "userId": 0,
           "status": "ACT",
           "id": id,
+          "categoryId": 0,
+          "name": "",
         }),
         token: token,
       );
@@ -125,7 +128,14 @@ class ProductRepositoryImpl implements ProductRepository {
         final Map<String, dynamic> jsonData = jsonDecode(response.data);
 
         if (jsonData['data'] != null) {
-          return Post.fromJson(jsonData['data']);
+          // API returns array, get first item
+          final List<dynamic> postsJson = jsonData['data'] is List
+              ? jsonData['data']
+              : [];
+
+          if (postsJson.isNotEmpty) {
+            return Post.fromJson(postsJson.first);
+          }
         }
       }
       return null;

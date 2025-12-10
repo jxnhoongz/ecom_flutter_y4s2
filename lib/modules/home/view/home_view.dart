@@ -400,8 +400,15 @@ class HomeView extends StatelessWidget {
       imageUrl = '${ConstantUri.imageBasePath}?filename=${post.image}';
     }
 
-    return Container(
-      decoration: BoxDecoration(
+    return GestureDetector(
+      onTap: () {
+        // Navigate to product detail page with product ID
+        if (post.id != null) {
+          Get.toNamed('/product-detail', arguments: post.id);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
@@ -515,6 +522,7 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ],
+      ),
       ),
     );
   }

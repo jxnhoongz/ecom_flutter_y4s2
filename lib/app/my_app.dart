@@ -1,6 +1,7 @@
 
 import 'package:app_e_commerce/modules/home/view/home_view.dart';
 import 'package:app_e_commerce/modules/login/view/login_view.dart';
+import 'package:app_e_commerce/modules/product_detail/view/product_detail_view.dart';
 import 'package:app_e_commerce/modules/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class MyApp  extends StatelessWidget {
           brightness: Brightness.dark,
         ),
       ),
-      initialRoute: '/splash',
+      initialRoute: '/login',
       getPages: [
         GetPage(
             name: '/splash',
@@ -44,6 +45,11 @@ class MyApp  extends StatelessWidget {
             name: '/login',
             page: ()=> LoginView(),
             transition: Transition.fadeIn
+        ),
+        GetPage(
+            name: '/product-detail',
+            page: ()=> ProductDetailView(),
+            transition: Transition.rightToLeft
         ),
       ],
     );
