@@ -7,15 +7,21 @@ class RemoteServiceImpl extends RemoteService{
 
 
   @override
-  Future<ApiBaseResponse> postApi({required String uri, required body}) async {
+  Future<ApiBaseResponse> postApi({required String uri, required body, String? token}) async {
     var responseBody = new ApiBaseResponse();
     print("Interception request uri {} $uri and body request {} : $body");
 
     try {
+      // Build headers with optional Authorization token
+      Map<String, String> headers = {"Content-Type": "application/json"};
+      if (token != null && token.isNotEmpty) {
+        headers["Authorization"] = "Bearer $token";
+      }
+
       var response = await httpClient.post(
         Uri.parse(uri),
         body: body,
-        headers: {"Content-Type": "application/json"},
+        headers: headers,
       ).timeout(Duration(
         seconds: 120
       ));

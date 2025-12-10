@@ -1,4 +1,5 @@
 
+import 'package:app_e_commerce/data/local/user_data_local_storage.dart';
 import 'package:app_e_commerce/repository/auth_repositoryImpl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ class LoginViewModel extends GetxController{
   var password = "".obs;
   var enablePassword = true.obs;
   var authRepository = AuthRepositoryImpl();
+  var userDataStorage = UserDataLocalStorage();
 
   @override
   void onInit() {
@@ -40,6 +42,16 @@ class LoginViewModel extends GetxController{
     }
     var loginRes = await authRepository.login(username.value, password.value);
     if(loginRes.accessToken != null){
+      // Save user data to local storage
+      await userDataStorage.saveUserInformation(
+        accessToken: loginRes.accessToken,
+        refreshToken: loginRes.refreshToken,
+        username: loginRes.user?.username,
+        email: loginRes.user?.email,
+        phone: loginRes.user?.phoneNumber,
+        userId: loginRes.user?.id,
+      );
+
       showMassageSuccess("Login Successfully.");
       Get.offAllNamed("/");
     } else {
