@@ -289,21 +289,35 @@ class HomeView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'Popular Products',
+                    Obx(() => Text(
+                      homeViewModel.showMyProductsOnly.value
+                          ? 'My Products'
+                          : 'Popular Products',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: colorScheme.onSurface,
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'See All',
-                        style: TextStyle(color: colorScheme.primary),
+                    )),
+                    Obx(() => FilterChip(
+                      label: Text(
+                        homeViewModel.showMyProductsOnly.value
+                            ? 'Show All'
+                            : 'My Products',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: homeViewModel.showMyProductsOnly.value
+                              ? colorScheme.onPrimary
+                              : colorScheme.primary,
+                        ),
                       ),
-                    ),
+                      selected: homeViewModel.showMyProductsOnly.value,
+                      onSelected: (_) => homeViewModel.toggleMyProducts(),
+                      selectedColor: colorScheme.primary,
+                      checkmarkColor: colorScheme.onPrimary,
+                      backgroundColor: colorScheme.surface,
+                      side: BorderSide(color: colorScheme.primary),
+                    )),
                   ],
                 ),
               ),
@@ -364,6 +378,49 @@ class HomeView extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Show menu with both options
+          showModalBottomSheet(
+            context: context,
+            backgroundColor: colorScheme.surface,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            ),
+            builder: (BuildContext context) {
+              return Container(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.category, color: colorScheme.primary),
+                      title: const Text('Create Category'),
+                      subtitle: const Text('Add a new category'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Get.toNamed('/manage-category');
+                      },
+                    ),
+                    const Divider(),
+                    ListTile(
+                      leading: Icon(Icons.add_shopping_cart, color: colorScheme.primary),
+                      title: const Text('Create Product'),
+                      subtitle: const Text('Add a new product'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Get.toNamed('/create-product');
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        },
+        backgroundColor: colorScheme.primary,
+        child: Icon(Icons.add, color: colorScheme.onPrimary),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

@@ -1,6 +1,8 @@
 
 import 'package:app_e_commerce/modules/home/view/home_view.dart';
 import 'package:app_e_commerce/modules/login/view/login_view.dart';
+import 'package:app_e_commerce/modules/manage_category/view/manage_category_view.dart';
+import 'package:app_e_commerce/modules/manage_product/view/manage_product_view.dart';
 import 'package:app_e_commerce/modules/product_detail/view/product_detail_view.dart';
 import 'package:app_e_commerce/modules/splash/view/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +51,16 @@ class MyApp  extends StatelessWidget {
         GetPage(
             name: '/product-detail',
             page: ()=> ProductDetailView(),
+            transition: Transition.rightToLeft
+        ),
+        GetPage(
+            name: '/manage-category',
+            page: ()=> ManageCategoryView(),
+            transition: Transition.rightToLeft
+        ),
+        GetPage(
+            name: '/create-product',
+            page: ()=> ManageProductView(),
             transition: Transition.rightToLeft
         ),
       ],

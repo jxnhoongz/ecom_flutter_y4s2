@@ -18,6 +18,7 @@ class HomeViewModel extends GetxController{
   var searchQuery = "".obs;
   var currentPage = 0.obs;
   var hasMoreData = true.obs;
+  var showMyProductsOnly = false.obs;
 
   @override
   void onInit(){
@@ -52,12 +53,21 @@ class HomeViewModel extends GetxController{
       }
 
       isLoadingPosts.value = true;
+
+      // Get current user ID if filtering by "My Products"
+      int userIdFilter = 0;
+      if (showMyProductsOnly.value) {
+        int? userId = await userDataStorage.getUserId();
+        userIdFilter = userId ?? 0;
+      }
+
       var postsData = await productRepository.getPosts(
         limit: 10,
         page: currentPage.value,
         status: "ACT",
         categoryId: selectedCategoryId.value,
         name: searchQuery.value,
+        userId: userIdFilter,
       );
 
       if (isRefresh) {
@@ -95,6 +105,7 @@ class HomeViewModel extends GetxController{
 
   // Filter by category
   void filterByCategory(int categoryId) {
+    print('Filtering by category ID: $categoryId');
     selectedCategoryId.value = categoryId;
     loadPosts(isRefresh: true);
   }
@@ -102,6 +113,12 @@ class HomeViewModel extends GetxController{
   // Search posts
   void searchPosts(String query) {
     searchQuery.value = query;
+    loadPosts(isRefresh: true);
+  }
+
+  // Toggle "My Products" filter
+  void toggleMyProducts() {
+    showMyProductsOnly.value = !showMyProductsOnly.value;
     loadPosts(isRefresh: true);
   }
 
