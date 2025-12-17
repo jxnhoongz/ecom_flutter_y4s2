@@ -1,0 +1,9 @@
+{
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "liveServer.settings.port": 5501,
+    "terminal.integrated.fontFamily": "'Monoid', 'Noto Sans Khmer', monospace",
+    "terminal.integrated.fontSize": 12,
+    "files.encoding": "utf8",
+    "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.letterSpacing": 0.5
+}

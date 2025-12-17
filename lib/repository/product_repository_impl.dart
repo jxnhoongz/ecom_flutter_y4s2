@@ -285,6 +285,144 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
+  Future<Category?> updateCategory({
+    required int id,
+    required String name,
+    String status = "ACT",
+  }) async {
+    try {
+      // Get auth token
+      String? token = await userDataStorage.getAccessToken();
+
+      var response = await serviceApi.postApi(
+        uri: ConstantUri.categoryUpdatePath,
+        body: jsonEncode({
+          "id": id,
+          "name": name,
+          "status": status,
+        }),
+        token: token,
+      );
+
+      if (response.isSuccess == true && response.data != null) {
+        final Map<String, dynamic> jsonData = jsonDecode(response.data);
+
+        // Return updated category on success
+        if (jsonData['code'] == 'SUC-000' || jsonData['message'] != null) {
+          return Category(
+            id: id,
+            name: name,
+            status: status,
+          );
+        }
+      }
+      return null;
+    } catch (e) {
+      print('Error updating category: $e');
+      return null;
+    }
+  }
+
+  @override
+  Future<Post?> updatePost({
+    required int id,
+    required String title,
+    required String description,
+    required int categoryId,
+    String? image,
+    String status = "ACT",
+  }) async {
+    try {
+      // Get auth token
+      String? token = await userDataStorage.getAccessToken();
+
+      var response = await serviceApi.postApi(
+        uri: ConstantUri.postUpdatePath,
+        body: jsonEncode({
+          "id": id,
+          "title": title,
+          "description": description,
+          "image": image,
+          "status": status,
+          "category": {
+            "id": categoryId,
+          },
+        }),
+        token: token,
+      );
+
+      if (response.isSuccess == true && response.data != null) {
+        final Map<String, dynamic> jsonData = jsonDecode(response.data);
+
+        // Return updated post on success
+        if (jsonData['code'] == 'SUC-000' || jsonData['message'] != null) {
+          return Post(
+            id: id,
+            title: title,
+            description: description,
+            image: image,
+            status: status,
+          );
+        }
+      }
+      return null;
+    } catch (e) {
+      print('Error updating post: $e');
+      return null;
+    }
+  }
+
+  @override
+  Future<bool> deleteCategory(int id) async {
+    try {
+      // Get auth token
+      String? token = await userDataStorage.getAccessToken();
+
+      var response = await serviceApi.postApi(
+        uri: ConstantUri.categoryDeletePath,
+        body: jsonEncode({
+          "id": id,
+        }),
+        token: token,
+      );
+
+      if (response.isSuccess == true) {
+        final Map<String, dynamic> jsonData = jsonDecode(response.data);
+        return jsonData['code'] == 'SUC-000' || jsonData['message'] != null;
+      }
+      return false;
+    } catch (e) {
+      print('Error deleting category: $e');
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> deletePost(int id) async {
+    try {
+      // Get auth token
+      String? token = await userDataStorage.getAccessToken();
+
+      var response = await serviceApi.postApi(
+        uri: ConstantUri.postDeletePath,
+        body: jsonEncode({
+          "id": id,
+        }),
+        token: token,
+      );
+
+      if (response.isSuccess == true) {
+        final Map<String, dynamic> jsonData = jsonDecode(response.data);
+        return jsonData['code'] == 'SUC-000' || jsonData['message'] != null;
+      }
+      return false;
+    } catch (e) {
+      print('Error deleting post: $e');
+      return false;
+    }
+  }
+
+  @override
   Future<String?> uploadImage(File imageFile) async {
     try {
       // Get auth token

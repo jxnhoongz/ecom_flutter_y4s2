@@ -1,4 +1,5 @@
 
+import 'package:app_e_commerce/modules/edit_product/view/edit_product_view.dart';
 import 'package:app_e_commerce/modules/home/view/home_view.dart';
 import 'package:app_e_commerce/modules/login/view/login_view.dart';
 import 'package:app_e_commerce/modules/manage_category/view/manage_category_view.dart';
@@ -61,6 +62,11 @@ class MyApp  extends StatelessWidget {
         GetPage(
             name: '/create-product',
             page: ()=> ManageProductView(),
+            transition: Transition.rightToLeft
+        ),
+        GetPage(
+            name: '/edit-product',
+            page: ()=> EditProductView(),
             transition: Transition.rightToLeft
         ),
       ],

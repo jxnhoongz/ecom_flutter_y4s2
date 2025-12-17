@@ -61,14 +61,34 @@ class HomeViewModel extends GetxController{
         userIdFilter = userId ?? 0;
       }
 
+      print('📊 Loading posts with filters:');
+      print('   - categoryId: ${selectedCategoryId.value}');
+      print('   - userId: $userIdFilter');
+      print('   - searchQuery: "${searchQuery.value}"');
+      print('   - page: ${currentPage.value}');
+
       var postsData = await productRepository.getPosts(
-        limit: 10,
+        limit: 100, // Request more since we'll filter client-side
         page: currentPage.value,
         status: "ACT",
         categoryId: selectedCategoryId.value,
         name: searchQuery.value,
         userId: userIdFilter,
       );
+
+      print('📦 Received ${postsData.length} posts from API');
+
+      // Client-side filtering since API doesn't respect categoryId
+      if (selectedCategoryId.value != 0) {
+        postsData = postsData.where((post) =>
+          post.category?.id == selectedCategoryId.value
+        ).toList();
+        print('📦 After client-side category filter: ${postsData.length} posts');
+      }
+
+      if (postsData.isNotEmpty) {
+        print('   First post category: ${postsData.first.category?.name} (ID: ${postsData.first.category?.id})');
+      }
 
       if (isRefresh) {
         posts.value = postsData;

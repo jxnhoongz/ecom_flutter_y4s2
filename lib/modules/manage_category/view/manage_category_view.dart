@@ -6,7 +6,6 @@ class ManageCategoryView extends StatelessWidget {
   ManageCategoryView({super.key});
 
   final manageCategoryViewModel = Get.put(ManageCategoryViewModel());
-  final TextEditingController categoryNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,11 +43,13 @@ class ManageCategoryView extends StatelessWidget {
                 ),
               ),
             ),
-            child: Column(
+            child: Obx(() => Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Create New Category',
+                  manageCategoryViewModel.isEditing.value
+                    ? 'Edit Category'
+                    : 'Create New Category',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -60,18 +61,26 @@ class ManageCategoryView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextField(
-                        controller: categoryNameController,
+                        controller: manageCategoryViewModel.categoryNameController,
                         decoration: InputDecoration(
                           hintText: 'Enter category name',
                           filled: true,
                           fillColor: colorScheme.surface,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: colorScheme.outline),
+                            borderSide: BorderSide(
+                              color: manageCategoryViewModel.isEditing.value
+                                ? colorScheme.primary
+                                : colorScheme.outline,
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: BorderSide(color: colorScheme.outline),
+                            borderSide: BorderSide(
+                              color: manageCategoryViewModel.isEditing.value
+                                ? colorScheme.primary
+                                : colorScheme.outline,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -82,43 +91,75 @@ class ManageCategoryView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 12),
-                    Obx(() => ElevatedButton(
-                          onPressed: manageCategoryViewModel.isCreating.value
-                              ? null
-                              : () {
-                                  manageCategoryViewModel.createCategory(
-                                    categoryNameController.text,
-                                  );
-                                  categoryNameController.clear();
-                                },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: colorScheme.primary,
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
+                    if (manageCategoryViewModel.isEditing.value) ...[
+                      ElevatedButton(
+                        onPressed: manageCategoryViewModel.isCreating.value
+                            ? null
+                            : () => manageCategoryViewModel.updateCategory(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colorScheme.primary,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          child: manageCategoryViewModel.isCreating.value
-                              ? SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    color: colorScheme.onPrimary,
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                              : Text(
-                                  'Create',
-                                  style: TextStyle(
-                                    color: colorScheme.onPrimary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        ),
+                        child: manageCategoryViewModel.isCreating.value
+                            ? SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: colorScheme.onPrimary,
+                                  strokeWidth: 2,
                                 ),
-                        )),
+                              )
+                            : Text(
+                                'Update',
+                                style: TextStyle(
+                                  color: colorScheme.onPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        onPressed: () => manageCategoryViewModel.cancelEdit(),
+                        child: Text('Cancel'),
+                      ),
+                    ] else
+                      ElevatedButton(
+                        onPressed: manageCategoryViewModel.isCreating.value
+                            ? null
+                            : () => manageCategoryViewModel.createCategory(
+                                  manageCategoryViewModel.categoryNameController.text,
+                                ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colorScheme.primary,
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: manageCategoryViewModel.isCreating.value
+                            ? SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: colorScheme.onPrimary,
+                                  strokeWidth: 2,
+                                ),
+                              )
+                            : Text(
+                                'Create',
+                                style: TextStyle(
+                                  color: colorScheme.onPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                      ),
                   ],
                 ),
               ],
-            ),
+            )),
           ),
 
           // Categories List
@@ -198,20 +239,36 @@ class ManageCategoryView extends StatelessWidget {
                           color: colorScheme.onSurfaceVariant,
                         ),
                       ),
-                      trailing: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: colorScheme.primaryContainer,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          category.status ?? 'ACT',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: colorScheme.primary,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: colorScheme.primaryContainer,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              category.status ?? 'ACT',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: colorScheme.primary,
+                              ),
+                            ),
                           ),
-                        ),
+                          const SizedBox(width: 8),
+                          IconButton(
+                            icon: Icon(Icons.edit, color: Colors.blue, size: 20),
+                            onPressed: () => manageCategoryViewModel.startEditCategory(category),
+                            tooltip: 'Edit',
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.delete, color: Colors.red, size: 20),
+                            onPressed: () => manageCategoryViewModel.confirmDeleteCategory(category),
+                            tooltip: 'Delete',
+                          ),
+                        ],
                       ),
                     ),
                   );

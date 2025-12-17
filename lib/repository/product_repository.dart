@@ -37,5 +37,26 @@ abstract class ProductRepository {
     String status = "ACT",
   });
 
+  // Update operations
+  Future<Category?> updateCategory({
+    required int id,
+    required String name,
+    String status = "ACT",
+  });
+
+  Future<Post?> updatePost({
+    required int id,
+    required String title,
+    required String description,
+    required int categoryId,
+    String? image,
+    String status = "ACT",
+  });
+
+  // Delete operations
+  Future<bool> deleteCategory(int id);
+
+  Future<bool> deletePost(int id);
+
   Future<String?> uploadImage(File imageFile);
 }

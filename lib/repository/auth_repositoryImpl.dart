@@ -41,4 +41,22 @@ class AuthRepositoryImpl implements AuthRepository{
 
     return response;
   }
+
+  @override
+  Future<LoginResponse?> refreshToken(String refreshToken) async {
+    try {
+      var response = await serviceApi.postApi(
+        uri: ConstantUri.refreshTokenPath,
+        body: jsonEncode({"refreshToken": refreshToken}),
+      );
+
+      if (response.isSuccess == true && response.data != null) {
+        return LoginResponse.fromJson(jsonDecode(response.data));
+      }
+      return null;
+    } catch (e) {
+      print('Error refreshing token: $e');
+      return null;
+    }
+  }
 }

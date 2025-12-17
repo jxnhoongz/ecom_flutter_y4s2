@@ -1,0 +1,1032 @@
+{
+	"info": {
+		"_postman_id": "9fd9d549-ec7e-4910-b6a8-60bff394b8b0",
+		"name": "Post Free App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23184685"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "List Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"limit\": 10,\n  \"page\": 1,\n  \"userId\": 1,\n  \"status\": \"ACT\",\n  \"id\": 0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/category/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"category",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category By id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"limit\": 10,\n  \"page\": 1,\n  \"userId\": 1,\n  \"status\": \"ACT\",\n  \"id\": 0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/category/36",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"category",
+								"36"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"createAt\": \"2024-11-02T02:17:36.252+00:00\",\n        \"createBy\": \"dinsaren\",\n        \"updateAt\": null,\n        \"updateBy\": null,\n        \"id\": 0,\n        \"name\": \"Real Estate 999\",\n        \"imageUrl\": null,\n        \"status\": \"DEL\"\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/category/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"category",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"createAt\": \"2024-11-02T02:17:36.252+00:00\",\n        \"createBy\": \"dinsaren\",\n        \"updateAt\": null,\n        \"updateBy\": null,\n        \"id\": 5,\n        \"name\": \"Real Estate\",\n        \"imageUrl\": null,\n        \"status\": \"DEL\"\n    }"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/category/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"category",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "List Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"limit\": 10,\n    \"page\": 0,\n    \"userId\": 0,\n    \"status\": \"ALL\",\n    \"id\": 0,\n    \"categoryId\": 0,\n    \"name\":\"sea\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/post/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"post",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post By id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"limit\": 10,\n  \"page\": 1,\n  \"userId\": 1,\n  \"status\": \"ACT\",\n  \"id\": 2\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/post/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"post",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"createAt\": \"\",\n  \"image\":\"1684223481379.jpg\",\n  \"createBy\": \"SYS\",\n  \"updateAt\": \"\",\n  \"updateBy\": \"SYS\",\n  \"id\": 0,\n  \"title\": \"News sea game in cambodia\",\n  \"description\": \"News sea game in cambodia\",\n  \"totalView\": 0,\n  \"status\": \"ACT\",\n  \"category\": {\n    \"createAt\": \"2023-05-02T15:45:01.282Z\",\n    \"createBy\": \"SYS\",\n    \"updateAt\": \"2023-05-02T15:45:01.282Z\",\n    \"updateBy\": \"string\",\n    \"id\": 2,\n    \"name\": \"string\",\n    \"imageUrl\": \"string\",\n    \"status\": \"string\"\n  },\n  \"user\": {\n    \"createAt\": \"2023-05-02T15:45:01.282Z\",\n    \"createBy\": \"string\",\n    \"updateAt\": \"2023-05-02T15:45:01.282Z\",\n    \"updateBy\": \"string\",\n    \"id\": 1,\n    \"username\": \"string\",\n    \"firstName\": \"string\",\n    \"lastName\": \"string\",\n    \"email\": \"string\",\n    \"verifyEmail\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"password\": \"string\",\n    \"status\": \"string\",\n    \"profile\": \"string\",\n    \"changePassword\": \"string\",\n    \"roles\": [\n      {\n        \"id\": 0,\n        \"name\": \"ROLE_CUSTOMER\"\n      }\n    ]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/post/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"post",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upload Image",
+			"item": [
+				{
+					"name": "Upload Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "File",
+									"type": "file",
+									"src": "/Users/dinsaren/Desktop/67241dfc20e66_1730420220_medium.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/app/public/v1/image/upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"app",
+								"public",
+								"v1",
+								"image",
+								"upload"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW5zYXJlbiIsImlhdCI6MTY2NzY2NDEwMiwiZXhwIjoxNjY3NzUwNTAyfQ.zqBS6U4VeC8voe9vpmqzxwWGRjAwmy5dDhnE_GyAsEphegsC0S0VrgvzN16r9YAJLjKNQEqD8x_WfccRD2hlQQ",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/app/category/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"app",
+										"category",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 05 Nov 2022 17:38:23 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"code\": \"200\",\n    \"data\": {\n        \"menuList\": [\n            {\n                \"id\": 1,\n                \"name\": \"Account\",\n                \"nameKh\": \"គណនី\",\n                \"route\": \"account\",\n                \"index\": 0,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Local Transfer\",\n                \"nameKh\": \"Local Transfer\",\n                \"route\": \"local-transfer\",\n                \"index\": 1,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"World Transfer\",\n                \"nameKh\": \"World Tranfers\",\n                \"route\": \"world-transfer\",\n                \"index\": 2,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Bill Payment\",\n                \"nameKh\": \"Bill Payment\",\n                \"route\": \"bill-payment\",\n                \"index\": 3,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 5,\n                \"name\": \"Phone Top Up\",\n                \"nameKh\": \"Phone Top Up\",\n                \"route\": \"phone-top-up\",\n                \"index\": 4,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 6,\n                \"name\": \"Code to Banking\",\n                \"nameKh\": \"Code to Banking\",\n                \"route\": \"code-to-bank\",\n                \"index\": 5,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 7,\n                \"name\": \"Saving\",\n                \"nameKh\": \"Saving\",\n                \"route\": \"saving\",\n                \"index\": 6,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Loan\",\n                \"nameKh\": \"Loan\",\n                \"route\": \"loan\",\n                \"index\": 7,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 9,\n                \"name\": \"Free Cash Out\",\n                \"nameKh\": \"Free Cash Out\",\n                \"route\": \"free-cash-out\",\n                \"index\": 8,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            }\n        ],\n        \"promotionList\": [\n            {\n                \"id\": 11,\n                \"name\": \"Buy 1 get 1\",\n                \"nameKh\": \"Buy 1 get 1\",\n                \"route\": \"promotion\",\n                \"index\": 0,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"PROMOTION\"\n            },\n            {\n                \"id\": 12,\n                \"name\": \"Buy 50%\",\n                \"nameKh\": \"Buy 50%\",\n                \"route\": \"promotion\",\n                \"index\": 1,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"PROMOTION\"\n            }\n        ],\n        \"applicationList\": [\n            {\n                \"id\": 13,\n                \"name\": \"Shoping App\",\n                \"nameKh\": \"Shoping App\",\n                \"route\": \"application\",\n                \"index\": 0,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"APPLICATION\"\n            },\n            {\n                \"id\": 14,\n                \"name\": \"Delivery App\",\n                \"nameKh\": \"Delivery App\",\n                \"route\": \"application\",\n                \"index\": 1,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"APPLICATION\"\n            }\n        ]\n    }\n}"
+						},
+						{
+							"name": "Upload Image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{POSRestAccessToken}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "File",
+											"type": "file",
+											"src": "/C:/Users/saren.din/Downloads/passport.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/app/public/v1/image/upload",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"app",
+										"public",
+										"v1",
+										"image",
+										"upload"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 25 Dec 2022 11:04:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Create Success\",\n    \"messageKh\": \"បង្កើតជោគជ័យ\",\n    \"messageCh\": \"Create Success\",\n    \"code\": \"200\",\n    \"data\": {\n        \"data\": \"1671966257967.png\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All V1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userAccountId\": \"49b75690-3443-45e5-a042-39ffc1568520\",\r\n    \"deviceId\": \"string\",\r\n    \"sessionId\": \"string\",\r\n    \"shopId\": \"4e8eebba-fd75-49bd-b8c7-cd4ede4758c6\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/user/v1/category/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"user",
+								"v1",
+								"category",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Category List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaW5zYXJlbiIsImlhdCI6MTY2NzY2NDEwMiwiZXhwIjoxNjY3NzUwNTAyfQ.zqBS6U4VeC8voe9vpmqzxwWGRjAwmy5dDhnE_GyAsEphegsC0S0VrgvzN16r9YAJLjKNQEqD8x_WfccRD2hlQQ",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/app/category/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"app",
+										"category",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 05 Nov 2022 17:38:23 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"code\": \"200\",\n    \"data\": {\n        \"menuList\": [\n            {\n                \"id\": 1,\n                \"name\": \"Account\",\n                \"nameKh\": \"គណនី\",\n                \"route\": \"account\",\n                \"index\": 0,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"Local Transfer\",\n                \"nameKh\": \"Local Transfer\",\n                \"route\": \"local-transfer\",\n                \"index\": 1,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 3,\n                \"name\": \"World Transfer\",\n                \"nameKh\": \"World Tranfers\",\n                \"route\": \"world-transfer\",\n                \"index\": 2,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 4,\n                \"name\": \"Bill Payment\",\n                \"nameKh\": \"Bill Payment\",\n                \"route\": \"bill-payment\",\n                \"index\": 3,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 5,\n                \"name\": \"Phone Top Up\",\n                \"nameKh\": \"Phone Top Up\",\n                \"route\": \"phone-top-up\",\n                \"index\": 4,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 6,\n                \"name\": \"Code to Banking\",\n                \"nameKh\": \"Code to Banking\",\n                \"route\": \"code-to-bank\",\n                \"index\": 5,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 7,\n                \"name\": \"Saving\",\n                \"nameKh\": \"Saving\",\n                \"route\": \"saving\",\n                \"index\": 6,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 8,\n                \"name\": \"Loan\",\n                \"nameKh\": \"Loan\",\n                \"route\": \"loan\",\n                \"index\": 7,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            },\n            {\n                \"id\": 9,\n                \"name\": \"Free Cash Out\",\n                \"nameKh\": \"Free Cash Out\",\n                \"route\": \"free-cash-out\",\n                \"index\": 8,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"MENU\"\n            }\n        ],\n        \"promotionList\": [\n            {\n                \"id\": 11,\n                \"name\": \"Buy 1 get 1\",\n                \"nameKh\": \"Buy 1 get 1\",\n                \"route\": \"promotion\",\n                \"index\": 0,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"PROMOTION\"\n            },\n            {\n                \"id\": 12,\n                \"name\": \"Buy 50%\",\n                \"nameKh\": \"Buy 50%\",\n                \"route\": \"promotion\",\n                \"index\": 1,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"PROMOTION\"\n            }\n        ],\n        \"applicationList\": [\n            {\n                \"id\": 13,\n                \"name\": \"Shoping App\",\n                \"nameKh\": \"Shoping App\",\n                \"route\": \"application\",\n                \"index\": 0,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"APPLICATION\"\n            },\n            {\n                \"id\": 14,\n                \"name\": \"Delivery App\",\n                \"nameKh\": \"Delivery App\",\n                \"route\": \"application\",\n                \"index\": 1,\n                \"imageUrl\": null,\n                \"status\": \"ACT\",\n                \"categoryCode\": \"APPLICATION\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "List  User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"limit\": 10,\n  \"page\": 1,\n  \"userId\": 1,\n  \"status\": \"ACT\",\n  \"id\": 0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/admin/user/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"admin",
+								"user",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find By Id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"limit\": 10,\n  \"page\": 1,\n  \"userId\": 0,\n  \"status\": \"ACT\",\n  \"id\": 0\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/admin/user/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"admin",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create  User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{POSRestAccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"dinsarenkh@gmail.com\",\n    \"firstName\": \"din\",\n    \"id\": 0,\n    \"lastName\": \"saren\",\n    \"password\": \"123456\",\n    \"profile\": \"1683908204863.jpg\",\n    \"role\": \"ROLE_ADMIN\",\n    \"username\": \"dinsaren\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/admin/user/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"admin",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update  User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{AccessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"firstName\": \"mi\",\n    \"lastName\": \"na\",\n    \"username\": \"mina\",\n    \"email\": \"mina@gmail.com\",\n    \"phoneNumber\": \"0962505090\",\n    \"password\": \"123456\",\n    \"confirmPassword\": \"123456\",\n    \"profile\": \"\",\n    \"role\": \"USER\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/app/admin/user/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"app",
+								"admin",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"AccessToken\", pm.response.json().accessToken)\r",
+							"\r",
+							"pm.collectionVariables.set(\"RefreshToken\", pm.response.json().refreshToken)\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"phoneNumber\": \"09625050168\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/oauth/token",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"firstName\": \"din\",\r\n  \"lastName\": \"saren\",\r\n  \"username\": \"dinsarenkh168\",\r\n  \"email\": \"dinsarenkh168@gmail.com\",\r\n  \"phoneNumber\": \"09625050168\",\r\n  \"password\": \"123456\",\r\n  \"confirmPassword\": \"123456\",\r\n  \"profile\": \"NON\",\r\n  \"role\": \"USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/oauth/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"oauth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"AccessToken\", pm.response.json().accessToken)\r",
+							"\r",
+							"pm.collectionVariables.set(\"RefreshToken\", pm.response.json().refreshToken)\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refreshToken\": \"{{RefreshToken}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/oauth/refresh",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"oauth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Push Notification Firebase",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{AccessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"to\": \"/topics/ALL_TOPIC\",\n    // \"to\":\"eOCNl1YXRiSzrD2kaWkfW7:APA91bG1zKJ7HzTa_xYrrueHEDtv7LP--h67fzizUFpHQxygSnMm__-hYJv-UiSsoiypHYl4Y2MA4zBQ3BM44AuqKiElUfDeil6DXkD40VQknaZDkKi0msk7BAZD5cVDIbdhcX_7bduo\",\n    \"priority\": \"high\",\n    \"notification\": {\n        \"body\": \"New Post From Mobile Application\",\n        \"title\": \"Description Post From Mobile Application\",\n        \"sound\": \"default\"\n    },\n    \"data\": {\n        \"ID\": \"PAYMENTR\",\n        \"imageUrl\": \"http://143.198.210.138:2030/api/public/view/image?filename=1684223214008.jpg\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fcm.googleapis.com/fcm/send",
+					"protocol": "https",
+					"host": [
+						"fcm",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"fcm",
+						"send"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://194.233.91.140:20099"
+		},
+		{
+			"key": "AccessToken",
+			"value": ""
+		},
+		{
+			"key": "RefreshToken",
+			"value": ""
+		},
+		{
+			"key": "local",
+			"value": ""
+		}
+	]
+}

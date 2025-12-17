@@ -1,0 +1,726 @@
+MOBILE APP DEVELOPMENT - MIDTERM EXAM ANSWERS (PLAIN TEXT)
+
+================================================================================
+1. What is Android?
+================================================================================
+
+Android គឺជាប្រព័ន្ធប្រតិបត្តិការ (Operating System) ប្រភពបើកចំហ (open-source) សម្រាប់ឧបករណ៍ចល័ត ដូចជា Smartphones, Tablets, Smartwatches និង Smart TVs ដែលបង្កើតដោយ Google។
+
+លក្ខណៈសំខាន់:
+- ផ្អែកលើ Linux Kernel ធ្វើអោយមានស្ថេរភាព និងសុវត្ថិភាព
+- អាចអភិវឌ្ឍកម្មវិធីដោយប្រើភាសា Java, Kotlin (official), Flutter, React Native
+- មាន Market Share ច្រើនជាង 70% នៅទូទាំងពិភពលោក
+- មាន Google Play Store សម្រាប់ចែកចាយកម្មវិធី
+- Support Multi-tasking, Widgets, Notifications
+
+
+================================================================================
+2. What is JDK?
+================================================================================
+
+JDK (Java Development Kit) គឺជាកញ្ចប់ឧបករណ៍ពេញលេញសម្រាប់អភិវឌ្ឍកម្មវិធី Java និង Android។
+
+សមាសភាគសំខាន់:
+- JRE (Java Runtime Environment) - បរិស្ថានដើម្បីរត់ Java programs
+- Compiler (javac) - បកប្រែ .java code ទៅជា .class bytecode
+- JVM (Java Virtual Machine) - ប្រតិបត្តិ bytecode
+- Development Tools - debugger (jdb), javadoc, jar archiver
+- Class Libraries - បណ្ណាល័យ Java Standard Edition APIs
+
+តើហេតុអ្វីត្រូវការ JDK:
+- ដើម្បីសរសេរ និង compile Java/Kotlin code
+- Android Studio ត្រូវការ JDK ដើម្បីដំណើរការ Gradle builds
+- ចាំបាច់សម្រាប់ Android app development
+
+
+================================================================================
+3. What is Firebase?
+================================================================================
+
+Firebase គឺជា Backend-as-a-Service (BaaS) Platform របស់ Google ដែលផ្ដល់សេវាកម្ម Cloud Infrastructure ពេញលេញសម្រាប់ Mobile និង Web Applications។
+
+សេវាកម្មសំខាន់ៗ:
+
+Authentication:
+- Email/Password, Phone, Google, Facebook Sign-in
+- Anonymous Authentication
+- Custom Authentication with JWT tokens
+
+Database:
+- Firestore - NoSQL real-time database
+- Realtime Database - JSON-based real-time sync
+
+Storage:
+- Cloud Storage សម្រាប់រូបភាព, វីដេអូ, files
+
+Cloud Messaging (FCM):
+- Push Notifications ទៅ Android, iOS, Web
+
+Analytics:
+- User behavior tracking
+- Event logging and reporting
+
+Hosting:
+- Deploy web apps ដោយឥតគិតថ្លៃ
+
+Crashlytics:
+- Error tracking and crash reporting
+
+
+================================================================================
+4. What is Flutter SDK?
+================================================================================
+
+Flutter SDK គឺជា UI Framework ប្រភពបើកចំហរបស់ Google សម្រាប់បង្កើត Native-quality Applications ពី Single Codebase។
+
+លក្ខណៈពិសេស:
+- Cross-Platform: Android, iOS, Web, Windows, macOS, Linux
+- Programming Language: Dart (optimized for UI)
+- Rendering Engine: Skia Graphics Engine (direct to canvas)
+- Hot Reload: មើលផលវិបាកក្នុងរយៈពេល milliseconds
+- Widget System: រាប់ពាន់ pre-built Material & Cupertino widgets
+- Performance: Compiles to native ARM code (60fps/120fps)
+
+Architecture:
+Dart Code (Your App) → Flutter Framework (Widgets, Rendering, Animation) → Flutter Engine (Skia, Dart Runtime) → Platform (Android/iOS/Web/Desktop)
+
+
+================================================================================
+5. What are Row and Column in Flutter?
+================================================================================
+
+Row និង Column គឺជា Layout Widgets មូលដ្ឋានបំផុតនៅក្នុង Flutter សម្រាប់រៀបចំ children widgets។
+
+Row:
+- ដាក់ widgets តាមជួរដេក (horizontal axis)
+- MainAxis = ដេក, CrossAxis = ឈរ
+
+Example:
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [Icon(Icons.home), Text("Home"), Icon(Icons.star)],
+)
+
+Column:
+- ដាក់ widgets តាមជួរឈរ (vertical axis)
+- MainAxis = ឈរ, CrossAxis = ដេក
+
+Example:
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [Text("Title"), Text("Subtitle"), ElevatedButton(...)],
+)
+
+Alignment Properties:
+- mainAxisAlignment - ការតម្រឹមតាម main direction
+- crossAxisAlignment - ការតម្រឹមតាម perpendicular direction
+- mainAxisSize - max/min space occupation
+
+
+================================================================================
+6. What is GetX?
+================================================================================
+
+GetX គឺជា Flutter Framework ដ៏មានឥទ្ធិពល និងស្រាលបំផុតសម្រាប់ State Management, Dependency Injection និង Route Management។
+
+មុខងារសំខាន់:
+
+1. State Management (Reactive Programming):
+var count = 0.obs; // Observable
+count.value++; // UI rebuilds automatically
+Obx(() => Text('Count: ${controller.count}'))
+
+2. Dependency Injection:
+Get.put(HomeController()); // Register
+Get.find<HomeController>(); // Retrieve
+Get.lazyPut(() => ApiService()); // Lazy load
+
+3. Route Management:
+Get.toNamed("/home"); // Navigate
+Get.offAllNamed("/login"); // Clear stack
+Get.back(); // Go back
+
+4. Utilities:
+- Snackbars: Get.snackbar()
+- Dialogs: Get.dialog()
+- BottomSheets: Get.bottomSheet()
+
+អត្ថប្រយោជន៍:
+- តិច boilerplate code
+- Performance ខ្ពស់
+- ងាយស្រួលរៀន និងប្រើ
+- មិនចាំបាច់ BuildContext
+
+
+================================================================================
+7. What is MVVM?
+================================================================================
+
+MVVM (Model-View-ViewModel) គឺជា Architectural Pattern សម្រាប់បែងចែក UI, Business Logic និង Data Management ឲ្យច្បាស់លាស់។
+
+សមាសភាគ:
+
+Model (Data Layer):
+- ទិន្នន័យ និង Business Objects
+- API responses, Database entities
+- JSON serialization/deserialization
+Example: class User { final String id; final String name; final String email; }
+
+View (UI Layer):
+- Interface ដែលអ្នកប្រើឃើញ
+- Widgets, Screens
+- គ្រាន់តែបង្ហាញ data និងចាប់ user input
+Example: class HomeView extends StatelessWidget { final controller = Get.put(HomeViewModel()); }
+
+ViewModel (Presentation Logic):
+- ភ្ជាប់ Model និង View
+- គ្រប់គ្រង State និង Business Logic
+- ទំនាក់ទំនងជាមួយ Repository/API
+Example: class HomeViewModel extends GetxController { var users = <User>[].obs; Future<void> fetchUsers() async { users.value = await repository.getUsers(); } }
+
+Data Flow:
+User Action → View → ViewModel → Repository → API
+User sees UI ← View ← ViewModel ← Response
+
+អត្ថប្រយោជន៍:
+- Testability - អាច unit test ViewModel
+- Separation of Concerns - កូដរៀបចំច្បាស់
+- Reusability - ViewModel អាចប្រើឡើងវិញ
+- Maintainability - ងាយស្រួល maintain
+
+
+================================================================================
+8. What is Stateless and Stateful?
+================================================================================
+
+Stateless Widget:
+Widget ដែលមិនមាន internal state ហើយមិនប្ដូរក្នុងអំឡុងពេលវាមានជីវិត។
+
+លក្ខណៈ:
+- Immutable - គ្រប់ properties ជា final
+- UI rebuild តែពេល parent widget rebuild
+- ប្រើសម្រាប់ static content
+
+ឧទាហរណ៍:
+class WelcomeText extends StatelessWidget {
+  final String name;
+  const WelcomeText({required this.name});
+  @override
+  Widget build(BuildContext context) {
+    return Text('Welcome, $name!');
+  }
+}
+
+ប្រើពេលណា:
+- Text, Icon, Image (static display)
+- Layout widgets (Row, Column, Container)
+- គ្មាន user interaction
+
+---
+
+Stateful Widget:
+Widget ដែលមាន mutable state អាចប្ដូរក្នុងអំឡុងពេលវាមានជីវិត។
+
+លក្ខណៈ:
+- មាន State object ដាច់ដោយឡែក
+- អាច rebuild UI ដោយ setState()
+- ទុកការចងចាំ data រវាង rebuilds
+
+ឧទាហរណ៍:
+class Counter extends StatefulWidget {
+  @override
+  _CounterState createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  int count = 0;
+
+  void increment() {
+    setState(() {
+      count++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Count: $count'),
+        ElevatedButton(onPressed: increment, child: Text('Increment')),
+      ],
+    );
+  }
+}
+
+ប្រើពេលណា:
+- Form inputs (TextField, Checkbox)
+- Animations
+- User interactions (Button clicks, gestures)
+- Data that changes over time
+
+Lifecycle Methods:
+- initState() - ពេល widget បង្កើត
+- build() - ពេល render UI
+- setState() - ពេល update state
+- dispose() - ពេល widget destroy
+
+
+================================================================================
+9. Why do we use Flutter for mobile app development?
+================================================================================
+
+1. Single Codebase = Multiple Platforms
+- សរសេរម្ដងទទួលបាន Android, iOS, Web, Desktop
+- បន្ថយ development time និង cost ទៅពាក់កណ្ដាល
+
+2. Performance ខ្ពស់
+- Compiles ទៅជា Native ARM/x86 code
+- គ្មាន JavaScript Bridge (unlike React Native)
+- អាចឈានដល់ 60fps/120fps
+
+3. Hot Reload & Hot Restart
+- មើលការផ្លាស់ប្ដូរភ្លាមៗក្នុង < 1 second
+- មិនបាត់ application state
+- បង្កើនល្បឿន development
+
+4. Rich UI Widgets
+- Material Design (Android style)
+- Cupertino (iOS style)
+- អាច customize widgets យ៉ាងពេញលេញ
+- Beautiful animations built-in
+
+5. Strong Ecosystem
+- Pub.dev មាន packages រាប់ម៉ឺន
+- Firebase integration ងាយស្រួល
+- Community ធំ និងសកម្ម
+
+6. Developer Experience
+- Dart language ងាយរៀន
+- VS Code / Android Studio support
+- Excellent documentation
+
+7. Production Ready
+- ប្រើដោយក្រុមហ៊ុនធំៗ: Google Pay, Alibaba, BMW
+- Stable release cycles
+- Long-term support
+
+8. Cost Effective
+- មួយ developer team អាចគ្រប់គ្រង cross-platform
+- Faster time-to-market
+- Easier maintenance
+
+
+================================================================================
+10. Comparison: Provider vs GetX
+================================================================================
+
+Provider vs GetX Comparison:
+
+Complexity:
+- Provider: ត្រូវ setup ច្រើន (ChangeNotifier, Consumer)
+- GetX: សាមញ្ញ (.obs, Obx)
+
+Boilerplate Code:
+- Provider: ច្រើន - ត្រូវ wrap widgets ជាមួយ Consumer
+- GetX: តិច - គ្រាន់តែ .obs និង Obx
+
+Performance:
+- Provider: ល្អ - rebuild តែ widgets ចាំបាច់
+- GetX: ល្អណាស់ - reactive programming
+
+State Management:
+- Provider: Basic - notifyListeners()
+- GetX: Advanced - reactive observables
+
+Navigation:
+- Provider: មិនមាន built-in (ប្រើ Navigator)
+- GetX: មាន Navigation System ពេញលេញ
+
+Dependency Injection:
+- Provider: មាន តែត្រូវ setup manually
+- GetX: Built-in (Get.put, Get.lazyPut)
+
+Learning Curve:
+- Provider: កម្រិតមធ្យម
+- GetX: ងាយស្រួល និងលឿន
+
+Community Support:
+- Provider: គាំទ្រដោយ Flutter Team
+- GetX: Community-driven
+
+Bundle Size:
+- Provider: តូច
+- GetX: តិចបន្តិច
+
+Utilities:
+- Provider: គ្មាន (Dialog, Snackbar)
+- GetX: មានពេញលេញ (Get.dialog, Get.snackbar)
+
+Example Code Comparison:
+
+Provider:
+// Create ChangeNotifier
+class CounterProvider extends ChangeNotifier {
+  int count = 0;
+  void increment() {
+    count++;
+    notifyListeners();
+  }
+}
+// Provide at top level
+ChangeNotifierProvider(create: (_) => CounterProvider(), child: MyApp())
+// Consume in widget
+Consumer<CounterProvider>(builder: (context, provider, child) { return Text('${provider.count}'); })
+
+GetX:
+// Create Controller
+class CounterController extends GetxController {
+  var count = 0.obs;
+  void increment() => count++;
+}
+// Put Controller
+final controller = Get.put(CounterController());
+// Observe in widget
+Obx(() => Text('${controller.count}'))
+
+សេចក្ដីសន្និដ្ឋាន:
+- Provider ល្អសម្រាប់ simple apps និង official support
+- GetX ល្អសម្រាប់ large apps និង rapid development
+
+
+================================================================================
+11. What is HTTP and HTTPS?
+================================================================================
+
+HTTP (HyperText Transfer Protocol):
+- Protocol សម្រាប់ផ្ទេរទិន្នន័យនៅលើ Internet
+- Client-Server Communication (Request/Response)
+- គ្មានសុវត្ថិភាព - ទិន្នន័យផ្ញើជា plain text
+- Port: 80
+- ឧទាហរណ៍: http://example.com
+
+HTTPS (HTTP Secure):
+- HTTP + SSL/TLS Encryption
+- មានសុវត្ថិភាព - ទិន្នន័យត្រូវបាន encrypt
+- Port: 443
+- ឧទាហរណ៍: https://learn-api.cambofreelance.com
+
+ខុសគ្នាយ៉ាងណា:
+
+HTTP:
+- គ្មាន encryption
+- គ្មាន certificate
+- Faster (មិនមាន encryption overhead)
+- គ្មាន Data Integrity
+- គ្មាន Authentication
+
+HTTPS:
+- មាន SSL/TLS encryption
+- ត្រូវការ SSL certificate
+- បន្តិចយឺត តែសុវត្ថិភាព
+- ទប់ស្កាត់ data tampering
+- Verify server identity
+
+ហេតុអ្វីត្រូវប្រើ HTTPS:
+
+1. Security:
+- ការពារ passwords, credit cards, personal info
+- ទប់ស្កាត់ Man-in-the-Middle attacks
+
+2. Trust:
+- Browser បង្ហាញ padlock icon
+- Users មានទំនុកចិត្តលើ website
+
+3. SEO:
+- Google ranking factor
+- Browsers (Chrome) mark HTTP as "Not Secure"
+
+4. Compliance:
+- PCI DSS requirements for payment processing
+- GDPR data protection requirements
+
+5. Modern APIs:
+- PWA (Progressive Web Apps) ត្រូវការ HTTPS
+- Geolocation, Camera access ត្រូវការ HTTPS
+
+SSL/TLS Handshake Process:
+1. Client Hello → Server
+2. Server Hello + Certificate ← Server
+3. Client verifies certificate
+4. Encrypted session key exchange
+5. Secure communication starts
+
+
+================================================================================
+12. What is Local Storage?
+================================================================================
+
+Local Storage គឺជាការរក្សាទុកទិន្នន័យនៅលើឧបករណ៍របស់អ្នកប្រើ (Device Storage) ដែលមិនត្រូវការ Internet connection។
+
+ប្រភេទ Local Storage នៅក្នុង Flutter:
+
+1. SharedPreferences:
+- រក្សាទុក key-value pairs សាមញ្ញ
+- String, int, double, bool, List<String>
+Example:
+final prefs = await SharedPreferences.getInstance();
+await prefs.setString('token', 'abc123');
+String? token = prefs.getString('token');
+ប្រើសម្រាប់: User settings, flags, small data
+
+2. Hive:
+- NoSQL Database ល្បឿនលឿន
+- ស្រាល និងងាយប្រើ
+Example:
+var box = await Hive.openBox('users');
+box.put('name', 'John Doe');
+String name = box.get('name');
+ប្រើសម្រាប់: Medium-sized structured data, caching
+
+3. SQLite (sqflite):
+- Relational Database
+- SQL queries
+Example:
+final db = await openDatabase('app.db');
+await db.insert('users', {'name': 'John', 'age': 25});
+List<Map> users = await db.query('users');
+ប្រើសម្រាប់: Complex queries, large datasets, relationships
+
+4. Secure Storage (flutter_secure_storage):
+- Encrypted storage សម្រាប់ sensitive data
+Example:
+final storage = FlutterSecureStorage();
+await storage.write(key: 'token', value: 'secret123');
+String? token = await storage.read(key: 'token');
+ប្រើសម្រាប់: Tokens, passwords, API keys
+
+5. File Storage (path_provider):
+- រក្សាទុក files (images, documents)
+Example:
+final directory = await getApplicationDocumentsDirectory();
+final file = File('${directory.path}/data.txt');
+await file.writeAsString('Hello World');
+
+Use Cases:
+- SharedPreferences: Login state, theme preference, language
+- Hive: Offline cache, user data, settings
+- SQLite: Posts, messages, complex data
+- Secure Storage: Access tokens, refresh tokens, passwords
+- File Storage: Downloaded images, PDFs, logs
+
+Best Practices:
+- កុំរក្សា passwords ជា plain text
+- ប្រើ Secure Storage សម្រាប់ sensitive data
+- Encrypt data មុនពេលរក្សាទុក
+- Clear cache ពេលអ្នកប្រើ logout
+
+
+================================================================================
+13. What is Scaffold?
+================================================================================
+
+Scaffold គឺជា Widget មូលដ្ឋាននៅក្នុង Flutter ដែលផ្ដល់ Layout Structure តាម Material Design Specification។
+
+Components:
+
+Scaffold(
+  appBar: AppBar(title: Text('Home'), actions: [IconButton(...)]),
+  drawer: Drawer(...), // Side menu
+  body: Center(child: Text('Main Content')),
+  floatingActionButton: FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+  floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+  bottomNavigationBar: BottomNavigationBar(items: [...]),
+  bottomSheet: BottomSheet(...),
+  backgroundColor: Colors.white,
+  resizeToAvoidBottomInset: true, // Keyboard handling
+)
+
+Main Properties:
+1. appBar - Top bar ជាមួយ title, actions, back button
+2. body - Main content area
+3. drawer - Left side navigation menu
+4. endDrawer - Right side navigation menu
+5. floatingActionButton - Primary action button
+6. bottomNavigationBar - Bottom navigation tabs
+7. bottomSheet - Sliding panel from bottom
+8. backgroundColor - Background color
+
+Advanced Features:
+
+Snackbar:
+ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Message sent!')));
+
+Persistent Bottom Sheet:
+final controller = showBottomSheet(context: context, builder: (context) => Container(height: 200));
+
+Modal Bottom Sheet:
+showModalBottomSheet(context: context, builder: (context) => Container(height: 300));
+
+Material Banner:
+ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(content: Text('Warning'), actions: [...]));
+
+
+================================================================================
+14. Code ListView with dynamic data (Flutter)
+================================================================================
+
+Using Real Category Data from Professor's API:
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class CategoryListView extends StatefulWidget {
+  @override
+  _CategoryListViewState createState() => _CategoryListViewState();
+}
+
+class _CategoryListViewState extends State<CategoryListView> {
+  List<dynamic> categories = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategories();
+  }
+
+  Future<void> fetchCategories() async {
+    final url = Uri.parse('https://learn-api.cambofreelance.com/api/app/category/list');
+    final token = 'your_access_token_here';
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'limit': 20,
+          'page': 1,
+          'userId': 1,
+          'status': 'ACT',
+          'id': 0,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          categories = data['data'];
+          isLoading = false;
+        });
+      } else {
+        throw Exception('Failed to load categories');
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    return ListView.builder(
+      itemCount: categories.length,
+      itemBuilder: (context, index) {
+        final category = categories[index];
+
+        return ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.blue,
+            child: Text(
+              category['name']?[0]?.toUpperCase() ?? '?',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+          title: Text(category['name'] ?? 'Unknown'),
+          subtitle: Text('Created by: ${category['createBy']} • ID: ${category['id']}'),
+          trailing: Chip(
+            label: Text(category['status']),
+            backgroundColor: category['status'] == 'ACT' ? Colors.green.withOpacity(0.2) : Colors.red.withOpacity(0.2),
+          ),
+          onTap: () {
+            print('Selected category: ${category['name']}');
+          },
+        );
+      },
+    );
+  }
+}
+
+
+================================================================================
+15. Code POST request to server API (Flutter + http)
+================================================================================
+
+Using Professor's Login API:
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+Future<void> login(String phoneNumber, String password) async {
+  final url = Uri.parse('https://learn-api.cambofreelance.com/api/oauth/token');
+
+  try {
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'phoneNumber': phoneNumber,
+        'password': password,
+      }),
+    ).timeout(Duration(seconds: 30));
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      String accessToken = data['accessToken'];
+      print('Login Success! Token: $accessToken');
+    } else {
+      print('Login Failed: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
+}
+
+Example with Authentication:
+
+Future<void> getCategories(String token) async {
+  final url = Uri.parse('https://learn-api.cambofreelance.com/api/app/category/list');
+
+  final response = await http.post(
+    url,
+    headers: {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode({
+      'limit': 10,
+      'page': 1,
+      'userId': 1,
+      'status': 'ACT',
+      'id': 0,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    List categories = data['data'];
+    print('Total Categories: ${categories.length}');
+  }
+}
+
+
+================================================================================
+END OF ANSWERS
+================================================================================

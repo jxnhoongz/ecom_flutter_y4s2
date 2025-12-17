@@ -57,14 +57,26 @@ class _ProductDetailViewState extends State<ProductDetailView> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.share, color: colorScheme.onPrimary),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Icon(Icons.favorite_border, color: colorScheme.onPrimary),
-            onPressed: () {},
-          ),
+          Obx(() {
+            if (productDetailViewModel.isOwner.value) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.edit, color: colorScheme.onPrimary),
+                    onPressed: () => productDetailViewModel.navigateToEditProduct(),
+                    tooltip: 'Edit',
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete, color: colorScheme.onPrimary),
+                    onPressed: () => productDetailViewModel.confirmDeleteProduct(),
+                    tooltip: 'Delete',
+                  ),
+                ],
+              );
+            }
+            return SizedBox.shrink();
+          }),
         ],
       ),
       body: Obx(() {
