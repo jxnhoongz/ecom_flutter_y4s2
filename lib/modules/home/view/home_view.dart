@@ -451,9 +451,13 @@ class HomeView extends StatelessWidget {
   }
 
   Widget _buildProductCard(dynamic post, ColorScheme colorScheme) {
-    // Build image URL
+    // Build image URL - filter out invalid placeholders
     String? imageUrl;
-    if (post.image != null && post.image!.isNotEmpty) {
+    if (post.image != null &&
+        post.image!.isNotEmpty &&
+        post.image != 'NON' &&
+        post.image != 'NONE' &&
+        !post.image!.trim().isEmpty) {
       imageUrl = '${ConstantUri.imageBasePath}?filename=${post.image}';
     }
 
