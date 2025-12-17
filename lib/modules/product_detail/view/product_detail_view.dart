@@ -11,34 +11,36 @@ class ProductDetailView extends StatefulWidget {
 }
 
 class _ProductDetailViewState extends State<ProductDetailView> {
-  final productDetailViewModel = Get.put(ProductDetailViewModel());
-  int? productId;
+  late final ProductDetailViewModel productDetailViewModel;
+  late final int productId;
 
   @override
   void initState() {
     super.initState();
-    // Get product ID from route arguments and load detail
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (productId != null) {
-        productDetailViewModel.loadProductDetail(productId!);
-      }
-    });
+    // Get product ID from route arguments
+    productId = Get.arguments as int;
+
+    // Create a fresh controller instance for this product
+    productDetailViewModel = Get.put(
+      ProductDetailViewModel(),
+      tag: 'product_$productId', // Unique tag per product
+    );
+
+    // Load product detail
+    productDetailViewModel.loadProductDetail(productId);
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Get arguments when dependencies change (route is ready)
-    if (productId == null && Get.arguments != null) {
-      productId = Get.arguments as int;
-    }
+  void dispose() {
+    // Clean up the controller when leaving the page
+    Get.delete<ProductDetailViewModel>(tag: 'product_$productId');
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final int productId = Get.arguments as int;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,

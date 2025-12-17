@@ -414,6 +414,9 @@ class ProductRepositoryImpl implements ProductRepository {
       if (response.isSuccess == true) {
         final Map<String, dynamic> jsonData = jsonDecode(response.data);
         return jsonData['code'] == 'SUC-000' || jsonData['message'] != null;
+      } else {
+        // Log the actual error response for debugging
+        print('Delete post failed - Status: ${response.errorCode}, Response: ${response.data}');
       }
       return false;
     } catch (e) {
