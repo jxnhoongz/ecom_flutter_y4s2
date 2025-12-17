@@ -428,6 +428,37 @@ class HomeView extends StatelessWidget {
         unselectedItemColor: colorScheme.onSurfaceVariant,
         backgroundColor: colorScheme.surface,
         currentIndex: 0,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              // Home - already here
+              break;
+            case 1:
+              // Categories - navigate to manage categories
+              Get.toNamed('/manage-category');
+              break;
+            case 2:
+              // Wishlist - not implemented yet
+              Get.snackbar(
+                'Coming Soon',
+                'Wishlist feature will be available soon!',
+                backgroundColor: colorScheme.primary,
+                colorText: colorScheme.onPrimary,
+                margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+              );
+              break;
+            case 3:
+              // Profile - not implemented yet
+              Get.snackbar(
+                'Coming Soon',
+                'Profile feature will be available soon!',
+                backgroundColor: colorScheme.primary,
+                colorText: colorScheme.onPrimary,
+                margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+              );
+              break;
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

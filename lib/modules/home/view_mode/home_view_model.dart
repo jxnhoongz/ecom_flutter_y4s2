@@ -36,7 +36,10 @@ class HomeViewModel extends GetxController{
         page: 0,
         status: "ACT",
       );
-      categories.value = categoriesData;
+      // Filter out deleted categories (backend may return them with null name)
+      categories.value = categoriesData.where((cat) =>
+        cat.name != null && cat.name!.isNotEmpty
+      ).toList();
     } catch (e) {
       showErrorMessage("Failed to load categories: $e");
     } finally {
@@ -77,6 +80,14 @@ class HomeViewModel extends GetxController{
       );
 
       print('📦 Received ${postsData.length} posts from API');
+
+      // Filter out deleted posts (status: "DEL" or null title)
+      postsData = postsData.where((post) =>
+        post.status != 'DEL' &&
+        post.title != null &&
+        post.title!.isNotEmpty
+      ).toList();
+      print('📦 After filtering deleted posts: ${postsData.length} posts');
 
       // Client-side filtering since API doesn't respect categoryId
       if (selectedCategoryId.value != 0) {
@@ -125,8 +136,10 @@ class HomeViewModel extends GetxController{
 
   // Filter by category
   void filterByCategory(int categoryId) {
-    print('Filtering by category ID: $categoryId');
+    print('🔍 Filtering by category ID: $categoryId');
+    print('🔍 Previous selected category: ${selectedCategoryId.value}');
     selectedCategoryId.value = categoryId;
+    print('🔍 New selected category: ${selectedCategoryId.value}');
     loadPosts(isRefresh: true);
   }
 

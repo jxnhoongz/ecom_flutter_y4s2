@@ -31,7 +31,8 @@ class ManageCategoryViewModel extends GetxController {
         page: 0,
         status: "ACT",
       );
-      categories.value = categoriesData;
+      // Filter out deleted categories (backend sets name to null instead of deleting)
+      categories.value = categoriesData.where((cat) => cat.name != null && cat.name!.isNotEmpty).toList();
     } catch (e) {
       showErrorMessage("Failed to load categories: $e");
     } finally {

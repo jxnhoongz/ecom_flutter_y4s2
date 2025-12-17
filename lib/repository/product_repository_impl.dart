@@ -112,17 +112,15 @@ class ProductRepositoryImpl implements ProductRepository {
       // Get auth token
       String? token = await userDataStorage.getAccessToken();
 
-      // Use list endpoint with ID filter instead of /{id} endpoint
+      // Use dedicated detail endpoint /{id}
       var response = await serviceApi.postApi(
-        uri: ConstantUri.postListPath,
+        uri: '${ConstantUri.postByIdPath}/$id',
         body: jsonEncode({
           "limit": 1,
           "page": 0,
           "userId": 0,
           "status": "ACT",
           "id": id,
-          "categoryId": 0,
-          "name": "",
         }),
         token: token,
       );
@@ -131,13 +129,15 @@ class ProductRepositoryImpl implements ProductRepository {
         final Map<String, dynamic> jsonData = jsonDecode(response.data);
 
         if (jsonData['data'] != null) {
-          // API returns array, get first item
-          final List<dynamic> postsJson = jsonData['data'] is List
-              ? jsonData['data']
-              : [];
-
-          if (postsJson.isNotEmpty) {
-            return Post.fromJson(postsJson.first);
+          // Check if API returns array or single object
+          if (jsonData['data'] is List) {
+            final List<dynamic> postsJson = jsonData['data'];
+            if (postsJson.isNotEmpty) {
+              return Post.fromJson(postsJson.first);
+            }
+          } else {
+            // API might return single object directly
+            return Post.fromJson(jsonData['data']);
           }
         }
       }
@@ -403,11 +403,20 @@ class ProductRepositoryImpl implements ProductRepository {
       // Get auth token
       String? token = await userDataStorage.getAccessToken();
 
+      // First, fetch the full post object
+      Post? post = await getPostById(id);
+      if (post == null) {
+        print('Delete post failed - Post not found');
+        return false;
+      }
+
+      // Soft delete: send full object with status "DEL" (following category delete pattern from Postman)
+      Map<String, dynamic> deleteBody = post.toJson();
+      deleteBody['status'] = 'DEL';
+
       var response = await serviceApi.postApi(
         uri: ConstantUri.postDeletePath,
-        body: jsonEncode({
-          "id": id,
-        }),
+        body: jsonEncode(deleteBody),
         token: token,
       );
 

@@ -13,7 +13,9 @@ class ProductDetailViewModel extends GetxController {
   var isLoading = false.obs;
   var hasError = false.obs;
   var errorMessage = "".obs;
-  var isOwner = false.obs;
+
+  // For learning purposes, allow all users to edit/delete any item
+  var isOwner = true.obs;
 
   // Load product detail by ID
   Future<void> loadProductDetail(int productId) async {
@@ -26,7 +28,6 @@ class ProductDetailViewModel extends GetxController {
 
       if (productData != null) {
         post.value = productData;
-        await checkOwnership();
       } else {
         hasError.value = true;
         errorMessage.value = "Product not found";
@@ -40,20 +41,13 @@ class ProductDetailViewModel extends GetxController {
     }
   }
 
-  // Check if current user owns this product
-  Future<void> checkOwnership() async {
-    try {
-      int? currentUserId = await userDataStorage.getUserId();
-      isOwner.value = (post.value?.user?.id == currentUserId);
-    } catch (e) {
-      isOwner.value = false;
-    }
-  }
-
   // Navigate to edit product page
-  void navigateToEditProduct() {
+  void navigateToEditProduct() async {
     if (post.value != null) {
-      Get.toNamed('/edit-product', arguments: post.value);
+      final productId = post.value!.id!;
+      await Get.toNamed('/edit-product', arguments: post.value);
+      // Reload product detail when returning from edit page
+      await loadProductDetail(productId);
     }
   }
 

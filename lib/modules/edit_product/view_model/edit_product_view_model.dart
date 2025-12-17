@@ -161,11 +161,8 @@ class EditProductViewModel extends GetxController {
       if (updatedProduct != null) {
         showSuccessMessage("Product '${updatedProduct.title}' updated successfully!");
 
-        // Navigate back to detail page
+        // Navigate back to detail page (which will reload the data)
         Get.back();
-
-        // Optionally navigate back to home to refresh
-        Get.offAllNamed('/');
       } else {
         showErrorMessage("Failed to update product");
       }
